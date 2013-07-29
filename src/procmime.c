@@ -349,7 +349,8 @@ gboolean procmime_decode_content(MimeInfo *mimeinfo)
 	    ))
 		return TRUE;
 
-	if (mimeinfo->type == MIMETYPE_MULTIPART || mimeinfo->type == MIMETYPE_MESSAGE)
+	if (mimeinfo->type == MIMETYPE_MULTIPART &&
+	    !strcasecmp(mimeinfo->subtype, "signed"))
 		return TRUE;
 
 	infp = procmime_fopen(mimeinfo->data.filename, "rb");
